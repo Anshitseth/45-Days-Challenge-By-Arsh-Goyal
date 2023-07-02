@@ -1,0 +1,21 @@
+class Solution {
+public:
+    void moveZeroes(vector<int>& nums) {
+        int l,r; // left and right pointer 
+        l = 0;
+        r = 0;
+        for(int i = 0;i<nums.size();i++)
+        {
+            if(nums[i] == 0)
+            {
+                r++;
+            }
+            else
+            {
+                swap(nums[r], nums[l]);
+                l++;
+                r++;
+            }
+        }
+    }
+};
