@@ -1,0 +1,16 @@
+class Solution {
+public:
+    ListNode* middleNode(ListNode* head) {
+        if(head == NULL) return NULL;
+        ListNode *Slow = head;
+        ListNode *Fast = head;
+        while(Fast != NULL && Fast->next != NULL)
+        {
+            Slow = Slow->next;
+            Fast = Fast->next->next;
+        }
+        return Slow;
+    }
+};
+
+// Slow and fast pointer approach
