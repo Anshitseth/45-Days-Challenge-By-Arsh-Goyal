@@ -1,0 +1,14 @@
+class Solution {
+public:
+    int getDecimalValue(ListNode* head) {
+        ListNode* curr = head;
+        int sum = 0;
+        // if(curr->val == 0) return curr->val;
+        while(curr!= NULL)
+        {
+            sum = sum*2 + curr->val;
+            curr = curr->next;
+        }
+        return sum;
+    }
+};
