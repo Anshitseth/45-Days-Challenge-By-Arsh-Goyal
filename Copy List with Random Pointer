@@ -1,0 +1,40 @@
+class Solution {
+public:
+    Node* copyRandomList(Node* head) {
+        Node* iter = head;
+        Node* front = head;
+        //step1 create deep copy and point next pointer
+        while(iter!=NULL)
+        {
+            front=iter->next;
+            Node* copy= new Node(iter->val);
+            iter->next = copy;
+            copy->next = front;
+            iter = front;
+        }
+        //assign random pointers for copy node 
+        iter = head;
+        while(iter!=NULL)
+        {
+            if(iter->random != NULL)
+            {
+                iter->next->random = iter->random->next; 
+            }
+            iter = iter->next->next;
+        }
+        iter = head;
+        Node* pseudoHead = new Node(0);
+        Node* copy = pseudoHead;
+        //separating copy and original linkedlist
+        while(iter!=NULL)
+        {
+            front = iter->next->next;
+            copy->next = iter->next;
+            iter->next = front;
+            copy = copy->next;
+            iter = front;
+        }
+
+        return pseudoHead->next;
+    }
+};
