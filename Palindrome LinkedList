@@ -1,0 +1,45 @@
+
+class Solution {
+public:
+   ListNode *reverseLinkedList(ListNode* ptr)
+   {
+       ListNode* prev = NULL;
+       ListNode* curr = ptr;
+       ListNode*next1 = NULL;
+       while(curr!=NULL)
+       {
+           next1 = curr->next;
+           curr->next = prev;
+           prev = curr;
+           curr = next1;
+       }
+       return prev;
+   };
+
+    bool isPalindrome(ListNode* head) {
+        //empty linkedlist as well as linkedlist with 1 node is palindrome in itself
+        if(head == NULL || head->next == NULL)
+        return true;
+    
+    //to find middle of the linkedlist
+    ListNode* slow = head;
+    ListNode* fast = head;
+    while(fast->next!=NULL && fast->next->next!=NULL)
+    {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    // toreversethelinkedlist from the middle of the LinkedList
+    slow->next = reverseLinkedList(slow->next);
+    slow = slow->next;
+    //to match haed->val and slow->val
+    while(slow!=NULL)
+    {
+        if(head->val != slow->val)
+        return false;
+        head = head->next;
+        slow = slow->next;
+    }
+    return true;
+    }
+};
