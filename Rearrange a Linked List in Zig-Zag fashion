@@ -1,0 +1,28 @@
+class Solution
+{
+    public:
+    Node *zigZag(Node* head)
+    {
+        if(head==NULL || head->next==NULL) return head;
+        int cnt = 0;
+        Node* prev = head;
+        Node* curr = head->next;
+        
+        while(curr!=NULL){
+            if(cnt%2==0){
+                if(prev->data>curr->data){
+                    swap(curr->data,prev->data);
+                }
+            }
+            else{
+                if(curr->data>prev->data){
+                    swap(curr->data,prev->data);
+                }
+            }
+            cnt++;
+            prev = curr;
+            curr = curr->next;
+        }
+        return head;
+    }
+};
