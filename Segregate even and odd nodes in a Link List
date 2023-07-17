@@ -1,0 +1,28 @@
+class Solution{
+public:
+    Node* divide(int N, Node *head){
+        // code here
+        Node* list1 = new Node(0);
+        Node* list2 = new Node(0);
+        Node* l1 = list1;
+        Node* l2 = list2;
+        while(head!=NULL)
+        {
+            if((head->data)%2==0)
+            {
+                l1->next = head;
+                l1 = l1->next;
+            }
+            else
+            {
+                l2->next = head;
+                l2 = l2->next;
+            }
+            head = head->next;
+        }
+        l1->next = list2->next;
+        l2->next = NULL;
+        
+        return list1->next;
+    }
+};
