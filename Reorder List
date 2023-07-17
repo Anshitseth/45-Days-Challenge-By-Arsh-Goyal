@@ -1,0 +1,48 @@
+class Solution {
+public:
+    ListNode* reverseLinkedList(ListNode* ptr)
+    {
+        ListNode* curr = ptr;
+        ListNode* prev = NULL;
+        ListNode* next1 = NULL;
+        while(curr!=NULL)
+        {
+            next1=curr->next;
+            curr->next = prev;
+            prev =curr;
+            curr = next1;
+        }
+        return prev;
+    }
+
+    void reorderList(ListNode* head) {
+        ListNode* list1 = new ListNode(0);
+        ListNode* list2 = new ListNode(0);
+        ListNode* fast = head;
+        ListNode* slow = head;
+        while(fast && fast->next)
+        {
+            fast = fast->next->next;
+            slow = slow->next;
+        }
+        list2->next = reverseLinkedList(slow);
+        slow = list2->next;
+        ListNode* start = head;
+        int cnt = 1;
+        while(start->next!=NULL || slow->next!=NULL)
+        {
+            if(cnt%2!=0)
+            {
+                list1->next = start;
+                start= start->next;
+            }
+            else
+            {
+                list1->next = slow;
+                slow = slow->next;
+            }
+            cnt++;
+            list1 = list1->next;
+        }
+    }
+};
