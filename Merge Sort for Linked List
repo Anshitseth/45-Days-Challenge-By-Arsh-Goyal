@@ -1,0 +1,77 @@
+class Solution{
+  public:
+    Node* findMid(Node* head)
+    {
+        Node* slow = head;
+        Node* fast = head->next;
+        while(fast!=NULL && fast->next!=NULL)
+        {
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        return slow;
+    }
+    
+    Node* merge(Node* list1, Node* list2)
+    {
+        Node* dummy = new Node(0);
+        Node*temp = dummy;
+        if(list1 == NULL)
+        return list2;
+        
+        if(list2 == NULL)
+        return list1;
+        
+        while(list1!=NULL && list2!=NULL)
+        {
+            if(list1->data<list2->data)
+            {
+                temp->next = list1;
+                temp = list1;
+                list1 = list1->next;
+            }
+            else
+            {
+                temp->next = list2;
+                temp = list2;
+                list2=list2->next;
+            }
+        }
+        
+        while(list1!=NULL)
+        {
+            temp->next = list1;
+            temp = list1;
+            list1 = list1->next;
+        }
+        while(list2!=NULL)
+        {
+            temp->next = list2;
+            temp = list2;
+            list2=list2->next;
+        }
+        dummy = dummy->next;
+        return dummy;
+    }
+    //Function to sort the given linked list using Merge Sort.
+    Node* mergeSort(Node* head) {
+        // your code here
+        if(head == NULL || head->next == NULL)
+        {
+            return head;
+        }
+//mid calculated
+        Node * mid = findMid(head);
+        
+        Node* left = head;
+        Node* right = mid->next;
+        mid->next = NULL;
+        //recursively sorted
+        left = mergeSort(left);
+        right = mergeSort(right);
+        //merge 2 lists
+        Node* res = merge(left,right);
+        
+        return res;
+    }
+};
