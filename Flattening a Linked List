@@ -1,0 +1,40 @@
+IMPORTANT
+
+Node* mergeTwoLists(Node* list1, Node* list2)
+{
+    Node* temp = new Node(0);
+    Node * res = temp;
+    
+    while(list1!=NULL && list2!=NULL)
+    {
+        if(list1->data < list2->data)
+        {
+            temp->bottom = list1;
+            temp = temp->bottom;
+            list1 = list1->bottom;
+        }
+        else
+        {
+            temp->bottom = list2;
+            temp = temp->bottom;
+            list2 = list2->bottom;
+        }
+    }
+    if(list1) temp->bottom = list1;
+    else temp->bottom = list2;
+    
+    return res->bottom;
+}
+Node *flatten(Node *root)
+{
+   // Your code here
+   if(root == NULL || root->next == NULL)
+   return root;
+   Node* down = root;
+   Node* nex = root->next;
+    nex = flatten(nex);
+    down->next = NULL;
+   root = mergeTwoLists(down, nex);
+   
+   return root;
+}
