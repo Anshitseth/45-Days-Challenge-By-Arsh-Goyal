@@ -1,0 +1,31 @@
+TC - O(M+N)
+SC - O(1)
+
+class Solution {
+public:
+    string addBinary(string a, string b) {
+        int la = a.length();
+        int lb = b.length();
+        int i = 0;
+        int carry = 0;
+        string ans = "";
+        while(i<la || i<lb || carry!=0)
+        {
+            int x = 0;
+            if(i<la && a[la-i-1] == '1')
+            {
+                x = 1;
+            }
+
+            int y = 0;
+            if(i<lb && b[lb-i-1] == '1')
+            {
+                y = 1;
+            }
+            ans = to_string((x+y+carry)%2) + ans;
+            carry = (x+y+carry)/2;
+            i++;
+        } 
+        return ans;
+    }
+};
