@@ -1,0 +1,20 @@
+class Solution {
+public:
+    void rangeSumbst(TreeNode* root, int low, int high, int &sum)
+    {
+        if(!root) return;
+        TreeNode*curr = root;
+        if(curr->val >= low && curr->val <= high)
+        {
+            sum += curr->val;
+        }
+        rangeSumbst(root->left, low, high, sum);
+        rangeSumbst(root->right, low, high, sum);
+    }
+
+    int rangeSumBST(TreeNode* root, int low, int high) {
+        int sum=0;
+        rangeSumbst(root, low, high, sum);
+        return sum;
+    }
+};
